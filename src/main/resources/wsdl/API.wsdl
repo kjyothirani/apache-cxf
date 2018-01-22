@@ -1,0 +1,147 @@
+<wsdl:definitions xmlns:impl="http://svcAutoGenXML" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:intf="http://svcAutoGenXML" xmlns:wsmex="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://svcAutoGenXML">
+<wsdl:types>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://svcAutoGenXML">
+<element name="determineEligibility">
+<complexType>
+<sequence>
+<element name="testtoolRequest" type="impl:TesttoolRequest"/>
+</sequence>
+</complexType>
+</element>
+<complexType name="TesttoolRequest">
+<sequence>
+<element name="clientHost1" nillable="true" type="xsd:string"/>
+<element name="clientUniqueId" nillable="true" type="xsd:string"/>
+<element name="envFolder" nillable="true" type="xsd:string"/>
+<element name="physicalServiceName" nillable="true" type="xsd:string"/>
+<element name="reqMessage" nillable="true" type="xsd:string"/>
+<element name="requestSize" nillable="true" type="xsd:string"/>
+<element name="responseSize" nillable="true" type="xsd:string"/>
+<element name="serviceEndpoint" nillable="true" type="xsd:string"/>
+<element name="servicevWaitTime" nillable="true" type="xsd:string"/>
+<element name="startTime" nillable="true" type="xsd:string"/>
+<element name="testName" nillable="true" type="xsd:string"/>
+<element name="virtulServiceName" nillable="true" type="xsd:string"/>
+</sequence>
+</complexType>
+<element name="determineEligibilityResponse">
+<complexType>
+<sequence>
+<element name="determineEligibilityReturn" type="impl:TesttoolResponse"/>
+</sequence>
+</complexType>
+</element>
+<complexType name="TesttoolResponse">
+<sequence>
+<element name="clientUniqueId" nillable="true" type="xsd:string"/>
+<element name="respMessage" nillable="true" type="xsd:string"/>
+<element name="serviceDuration" type="xsd:long"/>
+<element name="serviceEndTime" nillable="true" type="xsd:string"/>
+<element name="serviceStartTime" nillable="true" type="xsd:string"/>
+</sequence>
+</complexType>
+<element name="getRandomString">
+<complexType>
+<sequence>
+<element name="stringRequest" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="getRandomStringResponse">
+<complexType>
+<sequence>
+<element name="getRandomStringReturn" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+</schema>
+</wsdl:types>
+<wsdl:message name="getRandomStringRequest">
+<wsdl:part name="parameters" element="impl:getRandomString"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="determineEligibilityRequest">
+<wsdl:part name="parameters" element="impl:determineEligibility"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getRandomStringResponse">
+<wsdl:part name="parameters" element="impl:getRandomStringResponse"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="determineEligibilityResponse">
+<wsdl:part name="parameters" element="impl:determineEligibilityResponse"></wsdl:part>
+</wsdl:message>
+<wsdl:portType name="TesttoolService">
+<wsdl:operation name="determineEligibility">
+<wsdl:input name="determineEligibilityRequest" message="impl:determineEligibilityRequest"></wsdl:input>
+<wsdl:output name="determineEligibilityResponse" message="impl:determineEligibilityResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getRandomString">
+<wsdl:input name="getRandomStringRequest" message="impl:getRandomStringRequest"></wsdl:input>
+<wsdl:output name="getRandomStringResponse" message="impl:getRandomStringResponse"></wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="TesttoolServiceBinding_localpart" type="impl:TesttoolService">
+<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsp:PolicyReference URI="#Policy2"/>
+<wsp:PolicyReference URI="#Policy3"/>
+<wsdl:operation name="determineEligibility">
+<wsdlsoap:operation soapAction="" style="document"/>
+<wsdl:input>
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getRandomString">
+<wsdlsoap:operation soapAction="" style="document"/>
+<wsdl:input>
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="TesttoolServiceService_part_UsrTkn">
+<wsdl:port name="TesttoolServiceXML_UsrTkn-extport" binding="impl:TesttoolServiceBinding_localpart">
+<wsdlsoap:address location="https://api-lab.ny.gov:443/TesttoolServiceXML_UsrTkn"/>
+</wsdl:port>
+<wsdl:port name="TesttoolServiceBinding_localpartdefault-httpI-ND-Cluster" binding="impl:TesttoolServiceBinding_localpart">
+<wsdlsoap:address location="https://api-lab.ny.gov:443/TesttoolServiceXML_UsrTkn"/>
+</wsdl:port>
+</wsdl:service>
+<wsp:Policy Name="urn:uuid:96468af8-bf49-11e3-a73b-bc0604d47e06" visibility="public" wsu:Id="Policy2">
+<sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+<wsp:Policy visibility="public">
+<sp:AlgorithmSuite>
+<wsp:Policy visibility="public">
+<sp:Basic256/>
+</wsp:Policy>
+</sp:AlgorithmSuite>
+<sp:Layout>
+<wsp:Policy visibility="public">
+<sp:Lax/>
+</wsp:Policy>
+</sp:Layout>
+<sp:TransportToken>
+<wsp:Policy visibility="public">
+<sp:HttpsToken>
+<wsp:Policy visibility="public"/>
+</sp:HttpsToken>
+</wsp:Policy>
+</sp:TransportToken>
+</wsp:Policy>
+</sp:TransportBinding>
+</wsp:Policy>
+<wsp:Policy Name="urn:uuid:3d1a30fa-bf42-11e3-a73b-bc0604d47e06" visibility="public" wsu:Id="Policy3">
+<sp:SupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+<wsp:Policy visibility="public">
+<sp:UsernameToken SubjectCategory="urn:org:federatedgovernance:security:subject-category:consumer" sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+<sp:IssuerName/>
+<wsp:Policy visibility="public">
+<sp:WssUsernameToken11/>
+</wsp:Policy>
+</sp:UsernameToken>
+</wsp:Policy>
+</sp:SupportingTokens>
+</wsp:Policy>
+</wsdl:definitions>
